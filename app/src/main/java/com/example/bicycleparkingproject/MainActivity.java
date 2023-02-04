@@ -1,13 +1,19 @@
 package com.example.bicycleparkingproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.BufferedReader;
@@ -29,22 +35,30 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_PICTURE = "description";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final CollectionReference noteBookRef = db.collection("BikeRacks");
-
-    private ListView listView;
-
+    private final CollectionReference bikeRackRef = db.collection("BikeRacks");
+    private DocumentReference rackRef = db.document("BikeRacks/First Bike Rack");
     private List<BikeRack> bikeRacks = new ArrayList<>();
+    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btn = findViewById(R.id.btn);
         try {
             readBikeRackData();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         //Toast.makeText(this, "" + bikeRacks.get(2), Toast.LENGTH_LONG).show();
+        /* button to add initial Chicago bike rack data to Firestore
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBikeRack(v);
+            }
+        });
+         */
     }
 
     private void readBikeRackData() throws IOException {
@@ -72,5 +86,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    public void saveBikeRack(View v) {
+        for (BikeRack b : bikeRacks) {
+            String id = b.getId();
+            String location = b.getLocation();
+            BikeRack bikeRack = new BikeRack(id, location);
+            bikeRackRef.add(bikeRack).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
 }
