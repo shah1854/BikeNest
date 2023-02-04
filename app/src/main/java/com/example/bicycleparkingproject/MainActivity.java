@@ -38,26 +38,17 @@ public class MainActivity extends AppCompatActivity {
     private final CollectionReference bikeRackRef = db.collection("BikeRacks");
     private DocumentReference rackRef = db.document("BikeRacks/First Bike Rack");
     private List<BikeRack> bikeRacks = new ArrayList<>();
-    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn = findViewById(R.id.btn);
+        /* parse bike_rack.csv data into array list
         try {
             readBikeRackData();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //Toast.makeText(this, "" + bikeRacks.get(2), Toast.LENGTH_LONG).show();
-        /* button to add initial Chicago bike rack data to Firestore
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveBikeRack(v);
-            }
-        });
          */
     }
 
