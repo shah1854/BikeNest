@@ -7,17 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.AggregateQuery;
-import com.google.firebase.firestore.AggregateQuerySnapshot;
-import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,12 +33,21 @@ public class MainActivity extends AppCompatActivity {
     private final CollectionReference bikeRackRef = db.collection("BikeRacks");
     private DocumentReference rackRef = db.document("BikeRacks/First Bike Rack");
     private List<BikeRack> bikeRacks = new ArrayList<>();
-    private Button btn;
+    private Button buttonTestLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadBikeRackData();
+        /*buttonTestLoad = findViewById(R.id.button_test_load);
+        buttonTestLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, bikeRacks.get(0).getLocation(), Toast.LENGTH_SHORT).show();
+            }
+        });
+         */
         /* parse bike_racks.csv into an array list and save data in a firestore collection
         btn = findViewById(R.id.btn2);
         try {
@@ -102,5 +109,31 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void loadBikeRackData() {
+        bikeRackRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // retrieve every document from a collection using for-each loop:
+                        // don't have to check if QueryDocumentSnapshot exists
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            BikeRack rack = documentSnapshot.toObject(BikeRack.class);
+                            rack.setId(documentSnapshot.getId());   // gets firestore generated id for document
+                            // can add this rack to an ArrayList
+                            String id = rack.getId();
+                            String address = rack.getAddress();
+                            String location = rack.getLocation();
+                            bikeRacks.add(rack);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Error loading note!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onFailure: " + e.toString());
+                    }
+                });
     }
 }
