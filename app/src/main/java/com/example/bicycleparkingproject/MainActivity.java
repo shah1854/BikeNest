@@ -1,9 +1,11 @@
 package com.example.bicycleparkingproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +16,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.EventListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,37 +38,61 @@ public class MainActivity extends AppCompatActivity {
     private DocumentReference rackRef = db.document("BikeRacks/First Bike Rack");
     private List<BikeRack> bikeRacks = new ArrayList<>();
     private Button buttonTestLoad;
+    private final Handler HANDLER = new Handler();
+    private static final int DELAY_TIME = 5000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadBikeRackData();
-        /*buttonTestLoad = findViewById(R.id.button_test_load);
-        buttonTestLoad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, bikeRacks.get(0).getLocation(), Toast.LENGTH_SHORT).show();
-            }
-        });
-         */
         /* parse bike_racks.csv into an array list and save data in a firestore collection
         btn = findViewById(R.id.btn2);
         try {
-            readBikeRackData();
+            readBikeRackDataFromCsv();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveBikeRack(v);
+                saveBikeRackData(v);
             }
         });
          */
     }
 
-    private void readBikeRackData() throws IOException {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bikeRackRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.d(TAG, "onEvent: " + error.toString());
+                    return;
+                }
+                assert value != null;
+                for (QueryDocumentSnapshot documentSnapshot : value) {
+                    BikeRack rack = documentSnapshot.toObject(BikeRack.class);
+                    bikeRacks.add(rack);
+                    Log.d(TAG, "Successfully loaded bike rack");
+                }
+            }
+        });
+        //toastFirstRack();
+    }
+    private void toastFirstRack() {
+        HANDLER.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                Toast.makeText(MainActivity.this, "Back rack size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
+            }
+        }, DELAY_TIME);
+    }
+
+    private void readBikeRackDataFromCsv() throws IOException {
         InputStream is = getResources().openRawResource(R.raw.bike_racks);
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, StandardCharsets.UTF_8)
@@ -90,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public void saveBikeRack(View v) {
+    public void saveBikeRackData(View v) {
         for (BikeRack b : bikeRacks) {
             String id = b.getId();
             String location = b.getLocation();
@@ -109,31 +137,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    public void loadBikeRackData() {
-        bikeRackRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        // retrieve every document from a collection using for-each loop:
-                        // don't have to check if QueryDocumentSnapshot exists
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            BikeRack rack = documentSnapshot.toObject(BikeRack.class);
-                            rack.setId(documentSnapshot.getId());   // gets firestore generated id for document
-                            // can add this rack to an ArrayList
-                            String id = rack.getId();
-                            String address = rack.getAddress();
-                            String location = rack.getLocation();
-                            bikeRacks.add(rack);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "Error loading note!", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onFailure: " + e.toString());
-                    }
-                });
     }
 }
