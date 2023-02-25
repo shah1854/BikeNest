@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
     private final Handler HANDLER = new Handler();
     private static final int DELAY_TIME = 5000;
 
+    TextView tv_lat, tv_lon, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         /* parse bike_racks.csv into an array list and save data in a firestore collection
@@ -60,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
          */
+        tv_lat = findViewById(R.id.tv_lat); //Latitude
+        tv_lon = findViewById(R.id.tv_lon); //Longitude
+        tv_address = findViewById(R.id.tv_address); //Address of Location
+        tv_accuracy = findViewById(R.id.tv_accuracy);
+        tv_speed = findViewById(R.id.tv_speed);
+        tv_updates = findViewById(R.id.tv_updates);
+
+
+
+
     }
 
     @Override
