@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,18 +38,16 @@ public class MainActivity extends AppCompatActivity {
     private DocumentReference rackRef = db.document("BikeRacks/First Bike Rack");
     private List<BikeRack> bikeRacks = new ArrayList<>();
     private Button buttonTestLoad;
+    private Button btn;
     private final Handler HANDLER = new Handler();
     private static final int DELAY_TIME = 5000;
 
-    TextView tv_lat, tv_lon, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         /* parse bike_racks.csv into an array list and save data in a firestore collection
-        btn = findViewById(R.id.btn2);
+        btn = findViewById(R.id.btn);
         try {
             readBikeRackDataFromCsv();
         } catch (IOException e) {
@@ -62,16 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 saveBikeRackData(v);
             }
         });
+
          */
-        tv_lat = findViewById(R.id.tv_lat); //Latitude
-        tv_lon = findViewById(R.id.tv_lon); //Longitude
-        tv_address = findViewById(R.id.tv_address); //Address of Location
-        tv_accuracy = findViewById(R.id.tv_accuracy);
-        tv_speed = findViewById(R.id.tv_speed);
-        tv_updates = findViewById(R.id.tv_updates);
-
-
-
 
     }
 
@@ -93,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //toastFirstRack();
+        toastFirstRack();
     }
     private void toastFirstRack() {
         HANDLER.postDelayed(new Runnable() {
