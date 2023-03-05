@@ -59,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 saveBikeRackData(v);
             }
         });
-
          */
-
     }
 
     @Override
@@ -82,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        toastFirstRack();
+        //toastFirstRack();
     }
     private void toastFirstRack() {
         HANDLER.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-                Toast.makeText(MainActivity.this, "Back rack size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Bike rack size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
             }
         }, DELAY_TIME);
     }
