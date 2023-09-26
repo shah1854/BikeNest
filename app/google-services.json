@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "322436625306",
+    "project_id": "bicycle-parking-project-8cd55",
+    "storage_bucket": "bicycle-parking-project-8cd55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322436625306:android:cdf4d2d201b74c81590023",
+        "android_client_info": {
+          "package_name": "com.example.bicycleparkingproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322436625306-juju0ntt9bddkqcvhk3motboh5p8hvse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9OU2SXEZiCOHzvxuFG3_eEZM78A_r-AI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322436625306-juju0ntt9bddkqcvhk3motboh5p8hvse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
