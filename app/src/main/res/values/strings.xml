@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bicycle Parking Project</string>
+    <string name="continue_as_guest">CONTINUE AS GUEST</string>
+    <string name="new_user_register">NEW USER? REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="enter_password">enter password</string>
+    <string name="enter_email">enter email</string>
+    <string name="the_bicycle_parking_project">THE BICYCLE PARKING PROJECT</string>
 </resources>
