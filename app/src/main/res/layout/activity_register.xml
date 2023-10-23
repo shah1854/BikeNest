@@ -37,9 +37,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmailRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:hint="@string/enter_email"
+            android:hint="Email"
             android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +50,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFirstNameRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:hint="First Name"
             android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
@@ -63,7 +63,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLastNameRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:hint="Last Name"
             android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
@@ -75,9 +75,9 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPasswordRegister"
-            android:hint="@string/enter_password"
+            android:hint="Password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:textColor="#000000"
             android:inputType="textPassword">
@@ -89,10 +89,10 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPasswordConfirmRegister"
-            android:hint="@string/enter_password"
+            android:hint="Confirm Password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
             android:textColor="#000000"
             android:inputType="textPassword">
         </com.google.android.material.textfield.TextInputEditText>
@@ -104,23 +104,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btnRegister"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="#B3DDF2"-->
-<!--        android:text="REGISTER"-->
-<!--        android:textColor="@color/black" />-->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#B3DDF2"
+        android:text="REGISTER"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnGoToLogin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:backgroundTint="#4499e3"
         android:gravity="center"
         android:text="ALREADY HAVE AN ACCOUNT? LOGIN"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
 </LinearLayout>
