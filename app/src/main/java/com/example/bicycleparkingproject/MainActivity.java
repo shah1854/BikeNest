@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Location location) {
                     // we got permissions. Put values of location
-                    updateUIValues(location);
+                    //updateUIValues(location);
                     currentLocation = location;
 
                 }
@@ -234,9 +234,12 @@ public class MainActivity extends AppCompatActivity {
     private void updateUIValues(Location location) {
 
         //update text view objects with new location
-        tv_lat.setText(String.valueOf(location.getLatitude()));
-        tv_lon.setText(String.valueOf(location.getLongitude()));
-        tv_accuracy.setText(String.valueOf(location.getAccuracy()));
+        if (tv_lat != null && tv_lon != null && tv_accuracy != null) {
+            tv_lat.setText(String.valueOf(location.getLatitude()));
+            tv_lon.setText(String.valueOf(location.getLongitude()));
+            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
+        }
+
 
         if (location.hasAltitude()) {
             tv_altitude.setText(String.valueOf(location.hasAltitude()));
@@ -247,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (location.hasSpeed()) {
             tv_speed.setText(String.valueOf(location.getAltitude()));
-
 
         }
         else {
