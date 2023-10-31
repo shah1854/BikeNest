@@ -3,30 +3,17 @@ package com.example.bicycleparkingproject;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -36,7 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.EventListener;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,13 +79,16 @@ public class MainActivity extends AppCompatActivity {
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, Maps.class);
+//                Bundle args = new Bundle();
+//                args.putSerializable("ARRAYLIST",(Serializable)object);
+//                intent.putExtra("BUNDLE",args);
+//                startActivity(intent);
+
                 Intent i = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(i);
             }
         });
-
-
-
 
         //parse bike_racks.csv into an array list and save data in a firestore collection
         //btn = findViewById(R.id.btn);
