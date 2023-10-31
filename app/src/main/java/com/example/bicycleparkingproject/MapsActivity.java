@@ -128,29 +128,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void run() {
                 // Do something after 5s = 5000ms
                 //Toast.makeText(MapsActivity.this, "First bike rack: " + bikeRacks.get(0).getId(), Toast.LENGTH_SHORT).show();
-                addMarkers();
+                addTestMarker();
+                //addMarkers();
             }
         }, DELAY_TIME);
 
     }
 
-    private void addMarkers() {
-        BikeRack rack = bikeRacks.get(0);
-        Coordinates coordinates = parseCoordinatesFromString(rack.getLocation());
-        assert coordinates != null;
+    private void addTestMarker() {
         mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
-                .title(rack.getId())
-                .snippet(rack.getAddress()));
+                .position(new LatLng(41.8789, -87.6359))
+                .title("Willis Tower")
+                .snippet("Snippet"));
+    }
 
-//        for (BikeRack rack : bikeRacks) {
-//            Coordinates coordinates = parseCoordinatesFromString(rack.getLocation());
-//            assert coordinates != null;
-//            mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
-//                    .title(rack.getId())
-//                    .snippet(rack.getAddress()));
-//        }
+    private void addMarkers() {
+        for (BikeRack rack : bikeRacks) {
+            Coordinates coordinates = parseCoordinatesFromString(rack.getLocation());
+            assert coordinates != null;
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
+                    .title(rack.getId())
+                    .snippet(rack.getAddress()));
+        }
 
     }
 
