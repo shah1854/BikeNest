@@ -75,14 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        for (BikeRack bikerack : bikeRacks) {
-            Coordinates coordinates = parseCoordinatesFromString(bikerack.getLocation());
-            if (coordinates != null) {
-                double latitude = coordinates.getLatitude();
-                double longitude = coordinates.getLongitude();
-            }
-        }
     }
 
     /**
@@ -128,24 +120,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void run() {
                 // Do something after 5s = 5000ms
                 //Toast.makeText(MapsActivity.this, "First bike rack: " + bikeRacks.get(0).getId(), Toast.LENGTH_SHORT).show();
-                addTestMarker();
-                //addMarkers();
+                //addTestMarkers();
+                addMarkers();
             }
         }, DELAY_TIME);
 
     }
 
-    private void addTestMarker() {
+    private void addTestMarkers() {
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(41.8789, -87.6359))
                 .title("Willis Tower")
-                .snippet("Snippet"));
-    }
+                .snippet("Snippet 1"));
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(41.8826, -87.6226))
+                .title("Millenium Park")
+                .snippet("Snippet 2"));
 
+    }
     private void addMarkers() {
+        Toast.makeText(this, "Size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
         for (BikeRack rack : bikeRacks) {
             Coordinates coordinates = parseCoordinatesFromString(rack.getLocation());
-            assert coordinates != null;
+            //assert coordinates != null;
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
                     .title(rack.getId())
@@ -155,8 +152,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private Coordinates parseCoordinatesFromString(String location) {
-        String cleanedLocation = location.replaceAll("[^0-9.,-]", "");
-        String[] parts = cleanedLocation.split(",");
+        String cleanedLocation = location.replaceAll("[^0-9.;-]", "");
+        String[] parts = cleanedLocation.split(";");
         if (parts.length == 2) {
             try {
                 double latitude = Double.parseDouble(parts[0]);
