@@ -140,6 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     private void addMarkers() {
         Toast.makeText(this, "Size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
+        //assert bikeRacks.get(0) != null;
         for (BikeRack rack : bikeRacks) {
             Coordinates coordinates = parseCoordinatesFromString(rack.getLocation());
             //assert coordinates != null;
@@ -150,7 +151,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
-
     private Coordinates parseCoordinatesFromString(String location) {
         String cleanedLocation = location.replaceAll("[^0-9.;-]", "");
         String[] parts = cleanedLocation.split(";");
