@@ -60,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button buttonTestLoad;
     private Button btn;
     private final Handler HANDLER = new Handler();
-    private static final int DELAY_TIME = 5000;
+    private static final int DELAY_TIME = 10000;
 
     private static final String TAG = "MapsActivity";
 
@@ -111,7 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (QueryDocumentSnapshot documentSnapshot : value) {
                     BikeRack rack = documentSnapshot.toObject(BikeRack.class);
                     bikeRacks.add(rack);
-                    Log.d(TAG, "Successfully loaded bike rack");
+                    //Log.d(TAG, "Successfully loaded bike rack");
                 }
             }
         });
@@ -119,8 +119,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-                //Toast.makeText(MapsActivity.this, "First bike rack: " + bikeRacks.get(0).getId(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MapsActivity.this, "First bike rack location: " + bikeRacks.get(0).getLocation(), Toast.LENGTH_SHORT).show();
                 //addTestMarkers();
+                //Toast.makeText(MapsActivity.this, "Size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
+                //addOneMarker();
                 addMarkers();
             }
         }, DELAY_TIME);
@@ -139,17 +141,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
     private void addMarkers() {
-        Toast.makeText(this, "Size: " + bikeRacks.size(), Toast.LENGTH_SHORT).show();
-        //assert bikeRacks.get(0) != null;
         for (BikeRack rack : bikeRacks) {
+            if (rack == null) continue;
             Coordinates coordinates = parseCoordinatesFromString(rack.getLocation());
             //assert coordinates != null;
+            if (coordinates == null) continue;
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
-                    .title(rack.getId())
-                    .snippet(rack.getAddress()));
+                    .title(rack.getAddress()));
+            Log.d(TAG, "Added marker");
         }
-
     }
     private Coordinates parseCoordinatesFromString(String location) {
         String cleanedLocation = location.replaceAll("[^0-9.;-]", "");

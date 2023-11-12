@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot documentSnapshot : value) {
                     BikeRack rack = documentSnapshot.toObject(BikeRack.class);
                     bikeRacks.add(rack);
-                    Log.d(TAG, "Successfully loaded bike rack");
+                    //Log.d(TAG, "Successfully loaded bike rack");
                 }
             }
         });
