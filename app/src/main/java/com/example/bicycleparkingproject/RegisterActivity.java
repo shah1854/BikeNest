@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                                    progressBar.setVisibility(View.GONE);
                                     String uid = user.getUid();
                                     addData(uid, firstName, lastName, reference);
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
