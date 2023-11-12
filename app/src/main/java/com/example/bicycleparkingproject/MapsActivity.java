@@ -60,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button buttonTestLoad;
     private Button btn;
     private final Handler HANDLER = new Handler();
-    private static final int DELAY_TIME = 10000;
+    private static final int DELAY_TIME = 3000;
 
     private static final String TAG = "MapsActivity";
 
