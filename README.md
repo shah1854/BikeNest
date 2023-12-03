@@ -5,6 +5,7 @@ BikeNest is an Android app displaying bike parking locations in the city of Chic
 
 # Technical Architecture
 Below is the technical architecture diagram of our app. The user is greeted with a main page where they can login, register, or continue as a guest. They can then navigate to the map activity, where they can find/select bike rack markers. All of the database features of the app are supported by Google Firebase.
+
 ![Screenshot 2023-12-03 171657](https://github.com/CS222-UIUC-FA23/group-project-team27/assets/93841468/c6842cb8-7fd4-4e49-8904-d19daa3699af)
 
 # Reproducible Installation Instructions
