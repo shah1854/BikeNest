@@ -13,8 +13,13 @@ Download Android Studio and create an Android Virtual Device. Then, clone this r
 
 # Group Members and Roles
 Anand Krishnan: Build Java and XML front end content of app and find/select marker feature using Google Maps API and Firebase
+
 Mihir Shah: Build login and register interface and find/select marker feature using Google Maps API and Firebase
+
 Sourya Sappa: Build Java and XML front end content of app
+
 Ellis Irwin: Build login and register interface and created slides for final presentation
+
 Abhiram (AB) Vodela: Moral support
+
 Preetpaul Singh: Meeting adviser and group security
