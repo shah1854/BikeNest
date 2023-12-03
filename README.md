@@ -20,6 +20,8 @@ Sourya Sappa: Build Java and XML front end content of app
 
 Ellis Irwin: Build login and register interface and created slides for final presentation
 
+Edwin Ing: Project mentor
+
 Abhiram (AB) Vodela: Moral support
 
 Preetpaul Singh: Meeting adviser and group security
